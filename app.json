@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "newdatamovie",
+    "slug": "newdatamovie",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "newdatamovie"
+}
