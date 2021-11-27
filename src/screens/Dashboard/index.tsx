@@ -26,10 +26,7 @@ export const Dashboard = (): JSX.Element => {
             <ListContainer>
                 <ListWrapper>
                     <Title>Filmes de ação</Title>
-                    <Carrousel 
-                        horizontal 
-                        showsHorizontalScrollIndicator={false}
-                    >
+                    <Carrousel>
                         <Card 
                             source='https://www.cafecomfilme.com.br/media/k2/items/cache/8ffd18e59bf9d59135c7eafc3068ae79_XL.jpg?t=20200206_184920' 
                             name="Rambo: Programado para matar"
@@ -50,10 +47,7 @@ export const Dashboard = (): JSX.Element => {
                 </ListWrapper>
                 <ListWrapper>
                     <Title>Filmes de comédia</Title>
-                    <Carrousel 
-                        horizontal 
-                        showsHorizontalScrollIndicator={false}
-                    >
+                    <Carrousel>
                         <Card 
                             source='https://3.bp.blogspot.com/-vmQn-03c6Ck/VRSTqjnYbFI/AAAAAAAALWo/dcPV--0gbPE/s1600/Debi-E-Loide-Dois-Idiotas.jpg' 
                             name="Debi e Lóide: Dois idiotas em apuros"

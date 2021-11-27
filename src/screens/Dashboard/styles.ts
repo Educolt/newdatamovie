@@ -44,7 +44,10 @@ export const ListWrapper = styled.View`
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
 `;
-export const Carrousel = styled.ScrollView`
+export const Carrousel = styled.ScrollView.attrs({
+    horizontal: true,
+    showsHorizontalScrollIndicator:false,
+})`
     width: 100%;
     border-radius: 8px;
 `;
