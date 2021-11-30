@@ -1,12 +1,8 @@
 import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
+import { TouchableHighlight } from 'react-native';
 
-export const Test = styled.View`
-    width: 100%;
-    height: 100%;
-    justify-content: flex-end;
-`;
 export const Container = styled.View`
     width: 100%;
     background-color: ${({theme}) => theme.colors.modalBackground};
@@ -54,6 +50,11 @@ export const BtnContainer = styled.View`
 export const Icon = styled(Feather)`
     margin-right: 10px;
 `;
+export const CloseBtnContainer = styled(TouchableHighlight)`
+    position: absolute;
+    right: 0;
+    margin: 10px;
+`;
 export const CloseIcon = styled(FontAwesome)`
     position: absolute;
     right: 0;
@@ -66,5 +67,5 @@ export const ButtonPlay = styled.View`
     background-color: ${({theme}) => theme.colors.btnBackground};
     padding: 10px 20px;
     border-radius: 5px;
-    border: 1px solid ${({theme}) => theme.colors.shape}
+    border: 1px solid ${({theme}) => theme.colors.shape};
 `;

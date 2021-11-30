@@ -1,6 +1,6 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons'; 
+import Modal from 'react-native-modal';
 
 import { 
     Container, 
@@ -13,19 +13,34 @@ import {
     Icon,
     ButtonPlay,
     BtnText,
-    Test,
-    CloseIcon
+    CloseBtnContainer,
 } from './styles'
 
-export const MovieCardModal = () : JSX.Element => {
+interface MovieData {
+    imdb_id: string
+    title: string,
+    description: string,
+    uri: string,
+    year: string
+}
+
+interface IMovieModalDataProps {
+    movie: MovieData;
+    visible: boolean,
+}
+
+export const MovieCardModal = ({movie, visible }:IMovieModalDataProps) : JSX.Element => {
+
+    const [isVisible, setIsVisible] = useState(visible);
+
     return(
-        <Test>
+        <Modal isVisible={isVisible}>
             <Container>
             <MovieInfo>
-                <Image source={{uri: 'https://http2.mlstatic.com/D_NQ_NP_697417-MLB32324366598_092019-W.jpg'}}/>
+                <Image source={{uri: movie.uri}}/>
                 <InfoWrapper>
-                    <Title>Rambo: Last blood</Title>
-                    <Description>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis sit exercitationem impedit mollitia error repudiandae officia ullam aliquid, officiis molestiae recusandae quos dolores hic fugit, sed natus earum aliquam at.</Description>
+                    <Title>{movie.title}d</Title>
+                    <Description>{movie.description}</Description>
                 </InfoWrapper>
             </MovieInfo>
             
@@ -40,8 +55,10 @@ export const MovieCardModal = () : JSX.Element => {
                     <BtnText>Catalogar</BtnText>
                 </ButtonPlay>
             </BtnContainer>
-            <CloseIcon name="close" size={24} color="white" />
+            <CloseBtnContainer onPress={() => {setIsVisible(!isVisible)}}>
+                <FontAwesome name="close" size={24} color="white" />
+            </CloseBtnContainer>
             </Container>
-        </Test>
+        </Modal>
     );
 }

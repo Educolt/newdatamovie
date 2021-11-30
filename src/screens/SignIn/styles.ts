@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
-import { FontAwesome } from '@expo/vector-icons'; 
+import { FontAwesome } from '@expo/vector-icons';
 
 export const Container = styled.View`
     flex: 1;
@@ -11,11 +11,22 @@ export const Header = styled.View`
     width: 100%;
     height: ${RFPercentage(42)}px;
     background-color: ${({theme}) => theme.colors.primary}; 
+    justify-content: center;
+    align-items: center;
 `;
 export const Title = styled.Text`
     font-size: ${RFValue(24)}px;
     font-weight: bold;
     text-align: center;
+`;
+export const Logo = styled.Text`
+    font-size: ${RFValue(24)}px;
+    font-weight: bold;
+    text-align: center;
+    color: ${({theme}) => theme.colors.text};
+    border-radius: 50px;
+    border: 1px solid ${({theme}) => theme.colors.shape};
+    padding: 15px;
 `;
 export const LoginContainer = styled.View`
     width: 100%;
@@ -25,8 +36,8 @@ export const LoginContainer = styled.View`
     border: 1px solid ${({theme}) => theme.colors.shape};
     position: relative;
     top: -${RFValue(100)}px;
-    padding:${RFValue(47)}px ${RFValue(52)}px;
-    justify-content: space-between;
+    padding:0px ${RFValue(35)}px;
+    justify-content: space-around;
 `;
 export const LoginWrapper = styled.View`
     width: 100%;
@@ -47,8 +58,7 @@ export const Icon= styled(FontAwesome)`
 `;
 export const FormWrapper = styled.View`
     width: 100%;
-    justify-content:space-between;
-    align-items: center;
+    align-items: flex-end;
 `;
 export const ForgetPassText = styled.Text`
     font-size: ${RFValue(9)}px;
@@ -57,6 +67,11 @@ export const ForgetPassText = styled.Text`
 export const InputWrapper = styled.View`
     width: 100%;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: center;
     align-items:center;
+`;
+export const PassIcon = styled(FontAwesome)`
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
 `;

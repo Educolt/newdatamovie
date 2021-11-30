@@ -1,5 +1,4 @@
 import React from 'react';
-import { FontAwesome } from '@expo/vector-icons'; 
 
 import { 
     Container, 
@@ -11,7 +10,9 @@ import {
     FormWrapper,
     ForgetPassText,
     InputWrapper,
-    Title
+    Title,
+    PassIcon,
+    Logo
 } from './styles'
 
 import { LoginBtn } from '../../components/LoginBtn';
@@ -19,15 +20,17 @@ import { Input } from '../../components/Forms/Input'
 export const SignIn = (): JSX.Element => {
     return (
         <Container>
-            <Header />
+            <Header>
+                <Logo>Logo</Logo>
+            </Header>
             <LoginWrapper>
                 <LoginContainer>
-                    <Title>Login</Title>
+                    <Title>SignIn</Title>
                     <FormWrapper>
                         <Input placeholder="Digite o usuário." />
                         <InputWrapper>
                             <Input placeholder="Digite sua senha." secureTextEntry={true}/>
-                            <FontAwesome name="eye-slash" size={24} color="#2E262640" />
+                            <PassIcon name="eye-slash" size={20} color="#2E262640" />
                         </InputWrapper>
                         <ForgetPassText>Esqueci a senha</ForgetPassText>
                     </FormWrapper>
