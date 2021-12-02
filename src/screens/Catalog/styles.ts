@@ -3,6 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import { Input } from '../../components/Forms/Input';
 import { RFValue } from 'react-native-responsive-fontsize'
 
+
 export const Container = styled.View`
     width: 100%;
     height: 100%;
@@ -33,7 +34,7 @@ export const SearchInput = styled(Input)`
 export const ListContainer = styled.ScrollView`
     background-color: ${({theme}) => theme.colors.primary};
     height: 100%;
-    padding: 15px 0px 0px 10px;
+    padding: 15px;
 `;
 export const ListWrapper = styled.View`
     width: 100%;
@@ -41,11 +42,13 @@ export const ListWrapper = styled.View`
     border: 1px solid ${({theme}) => theme.colors.shape};
     padding: 10px;
     margin-bottom: 10px;
+    border-radius: 8px;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
+    align-items: center;
 `;
 export const Carrousel = styled.ScrollView.attrs({
-    horizontal: true,
+    horizontal: false,
     showsHorizontalScrollIndicator:false,
 })`
     width: 100%;

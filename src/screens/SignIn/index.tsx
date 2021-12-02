@@ -1,5 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 
+// react-hook-form
+import { useForm } from 'react-hook-form'
+
+// alert
+import AwesomeAlert from 'react-native-awesome-alerts';
+
+// styled components
 import { 
     Container, 
     Header, 
@@ -7,43 +15,155 @@ import {
     LoginContainer, 
     IconWrapper,
     Icon,
-    FormWrapper,
+    Form,
     ForgetPassText,
     InputWrapper,
     Title,
     PassIcon,
-    Logo
+    Logo,
+    LogoContainer,
+    LogoIcon,
+    BtnIconContainer,
+    PassIconContainer,
+    InputPass,
 } from './styles'
 
+// app components
 import { LoginBtn } from '../../components/LoginBtn';
-import { Input } from '../../components/Forms/Input'
+import { InputForm } from '../../components/Forms/InputForm'
+
+// types
+interface FormData {
+    username: string;
+    password: string;
+}
+
 export const SignIn = (): JSX.Element => {
+
+    // state
+    const [isPassVisible, setIsPassVisible] = useState(true);
+    const [isAlertVisible, setIsAlertVisible] = useState(false);
+    const [alertText, setAlertText] = useState('');
+
+    // future features
+    const [isAlertBtnsVisible, setIsAlertBtnsVisible] = useState(false);
+
+    // react-hook-form
+    const {
+        control,
+        handleSubmit,
+    } = useForm();
+
+    // toggle password visible state
+    const togglePassVisible = () => {setIsPassVisible(!isPassVisible)}
+
+    const onSubmitForm = (form: FormData) => {
+
+        if((form.username === '') || (form.username === undefined)) {
+            setIsAlertVisible(true);
+            setAlertText('Por favor! Digite o usuário.');
+            return;
+        } else if((form.password === '') || (form.password === undefined)) {
+            setIsAlertVisible(true)
+            setAlertText('Por favor ! Digite a senha.');
+            return;
+        }
+        
+        const user = {
+            username: form.username,
+            password: form.password
+        }
+        console.log(user);   
+    }
+
     return (
-        <Container>
-            <Header>
-                <Logo>Logo</Logo>
-            </Header>
-            <LoginWrapper>
-                <LoginContainer>
-                    <Title>SignIn</Title>
-                    <FormWrapper>
-                        <Input placeholder="Digite o usuário." />
-                        <InputWrapper>
-                            <Input placeholder="Digite sua senha." secureTextEntry={true}/>
-                            <PassIcon name="eye-slash" size={20} color="#2E262640" />
-                        </InputWrapper>
-                        <ForgetPassText>Esqueci a senha</ForgetPassText>
-                    </FormWrapper>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <Container>
+                <Header>
+                    <LogoContainer>
+                        <LogoIcon name="movie" size={30} />
+                        <Logo>ND_Movie</Logo>
+                    </LogoContainer>
+                </Header>
+                <LoginWrapper>
+                    <LoginContainer>
+                        <Title>SignIn</Title>
+                        <Form>
+                            <InputForm 
+                                placeholder="Digite o usuário."
+                                control={control}
+                                name="username"
+                                secureTextEntry={false}
+                            />
+                            <InputWrapper>
+                                <InputPass 
+                                    placeholder="Digite sua senha." 
+                                    secureTextEntry={isPassVisible}
+                                    control={control}
+                                    name="password"
+                                />
+                                <PassIconContainer activeOpacity={0.5} onPress={togglePassVisible}>
+                                    {!isPassVisible ? 
+                                        (<PassIcon name="eye" size={20} color="#2E262640" />):
+                                        (<PassIcon name="eye-slash" size={20} color="#2E262640" />)
+                                    }
+                                </PassIconContainer>
+                            </InputWrapper>
+                            <ForgetPassText>Esqueci a senha</ForgetPassText>
+                        </Form>
 
-                    <LoginBtn />
+                        <LoginBtn activeOpacity={0.5} onPress={handleSubmit(onSubmitForm)}/>
 
-                    <IconWrapper> 
-                       <Icon name="google" size={20} color="#DB4437" />
-                       <Icon name="facebook" size={20} color="#4267B2" />
-                       <Icon name="twitter" size={20} color="#1DA1F2" />
-                    </IconWrapper>
-                </LoginContainer>   
-            </LoginWrapper>
-        </Container>
+                        <IconWrapper> 
+                            <BtnIconContainer activeOpacity={0.5} onPress={() => setIsAlertBtnsVisible(true)}>
+                                <Icon name="google" size={20} color="#DB4437" />    
+                            </BtnIconContainer>
+                        
+                        <BtnIconContainer activeOpacity={0.5} onPress={() => setIsAlertBtnsVisible(true)}>
+                                <Icon name="facebook" size={20} color="#4267B2" />
+                        </BtnIconContainer>
+                        
+                        <BtnIconContainer activeOpacity={0.5} onPress={() => setIsAlertBtnsVisible(true)}>
+                                <Icon name="twitter" size={20} color="#1DA1F2" />
+                        </BtnIconContainer>
+                        </IconWrapper>
+                    </LoginContainer>   
+                </LoginWrapper>
+                <AwesomeAlert
+                show={isAlertVisible}
+                showProgress={false}
+                title="Campo obrigatório !"
+                message={alertText}
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                confirmText="Ok"
+                confirmButtonColor="#ffd60a"
+                onCancelPressed={() => {
+                    setIsAlertVisible(false);
+                }}
+                onConfirmPressed={() => {
+                    setIsAlertVisible(false)
+                }}
+                />
+                <AwesomeAlert
+                show={isAlertBtnsVisible}
+                showProgress={false}
+                title="Try it Later ! ;)"
+                message='This feature is on development, try it later ! ;)'
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                confirmText="Nice ;)."
+                confirmButtonColor="#ffd60a"
+                onCancelPressed={() => {
+                    setIsAlertBtnsVisible(false);
+                }}
+                onConfirmPressed={() => {
+                    setIsAlertBtnsVisible(false)
+                }}
+                />
+            </Container>
+        </TouchableWithoutFeedback>
     )
 }

@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { FontAwesome } from '@expo/vector-icons'; 
-import Modal from 'react-native-modal';
+import React, { useState, useEffect } from 'react';
 
+// alert
+import AwesomeAlert from 'react-native-awesome-alerts';
+
+// styled components
 import { 
     Container, 
     MovieInfo, 
@@ -12,10 +14,10 @@ import {
     BtnContainer,
     Icon,
     ButtonPlay,
-    BtnText,
-    CloseBtnContainer,
+    BtnText
 } from './styles'
 
+// types
 interface MovieData {
     imdb_id: string
     title: string,
@@ -26,39 +28,61 @@ interface MovieData {
 
 interface IMovieModalDataProps {
     movie: MovieData;
-    visible: boolean,
+    isCatalogTrue: boolean;
 }
 
-export const MovieCardModal = ({movie, visible }:IMovieModalDataProps) : JSX.Element => {
+export const MovieCardModal = ({movie, isCatalogTrue}: IMovieModalDataProps): JSX.Element => {
 
-    const [isVisible, setIsVisible] = useState(visible);
+    // state
+    const [ isCatalog, setIsCatalog ] = useState(isCatalogTrue);
+    const [ isAlert, setIsAlert ] = useState(false);
+
+    const {uri, title, description} = movie;
 
     return(
-        <Modal isVisible={isVisible}>
-            <Container>
+        <Container>
             <MovieInfo>
-                <Image source={{uri: movie.uri}}/>
-                <InfoWrapper>
-                    <Title>{movie.title}d</Title>
-                    <Description>{movie.description}</Description>
-                </InfoWrapper>
+                <Image source={{uri}}/>
+                    <InfoWrapper>
+                        <Title>{title}</Title>
+                        <Description>{description}</Description>
+                    </InfoWrapper>
             </MovieInfo>
-            
+                
             <BtnContainer>
-                <ButtonPlay>
+                <ButtonPlay activeOpacity={0.8} onPress={() => {
+                    setIsAlert(true);
+                }}>
                     <Icon name="play" size={20} color="white"/>
                     <BtnText>Assistir</BtnText>
                 </ButtonPlay>
-                
-                <ButtonPlay>
-                    <Icon name="plus" size={20} color="white"/>
+                    
+                <ButtonPlay activeOpacity={0.8} onPress={() => setIsCatalog(!isCatalog)}>
+                    {
+                        isCatalog ? 
+                        <Icon name="check" size={20} color="white"/>: 
+                        <Icon name="plus" size={20} color="white"/>
+                    }
                     <BtnText>Catalogar</BtnText>
                 </ButtonPlay>
             </BtnContainer>
-            <CloseBtnContainer onPress={() => {setIsVisible(!isVisible)}}>
-                <FontAwesome name="close" size={24} color="white" />
-            </CloseBtnContainer>
-            </Container>
-        </Modal>
+            <AwesomeAlert
+                show={isAlert}
+                showProgress={false}
+                title="Try it Later !"
+                message='This feature is on development, try it later ! ;)'
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                showConfirmButton={true}
+                confirmText="Nice ;)."
+                confirmButtonColor="#ffd60a"
+                onCancelPressed={() => {
+                    setIsAlert(false);
+                }}
+                onConfirmPressed={() => {
+                    setIsAlert(false)
+                }}
+            />
+        </Container>              
     );
 }

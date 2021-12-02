@@ -1,12 +1,12 @@
 export default {
     colors: {
-        primary: '#4B4848',
-        secondary: '#DCDCDC',
-        text: '#FEFEFE',
-        background: '#948A8A',
+        primary: '#000814',
+        secondary: '#ffd60a',
+        text: '#000814',
         white: '#FFFFFF',
-        shape: '#A6ABA5',
-        modalBackground: '#8E8787',
-        btnBackground: '#716D6D',
+        shape: '#000814',
+        modalBackground: '#ffd60a',
+        btnBackground: '#000814',
+        btnText: '#fff'
     }
 }

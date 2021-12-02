@@ -6,5 +6,4 @@ export const Container = styled(TextInput)`
     border-radius: 8px;
     padding: 5px 5px;
     width: 100%;
-    margin-bottom: 5px;
 `;

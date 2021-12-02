@@ -28,7 +28,7 @@ interface MovieProps {
     imdb_id:string
 }
 
-export const Dashboard = (): JSX.Element => {
+export const Catalog = (): JSX.Element => {
 
     // app state
     const [movieList, setMovieList] = useState<MovieProps[]>([]);
@@ -40,7 +40,7 @@ export const Dashboard = (): JSX.Element => {
         imdb_id: ' '
     });
 
-    // utils funcs
+    // uitl funcs
     async function getDataUri(id: string) {
         const response = await rapidApi.request({
             method: "GET", 
@@ -99,7 +99,7 @@ export const Dashboard = (): JSX.Element => {
             </Header>
             <ListContainer>
                 <ListWrapper>
-                    <Title>Filmes mais populares</Title>
+                    <Title>Catálogo</Title>
                     <Carrousel>
                         {movieList.map((data:MovieProps) => (
                             <Card

@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons'; 
-import { TouchableHighlight } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 export const Container = styled.View`
     width: 100%;
@@ -35,7 +34,7 @@ export const Title = styled.Text`
 export const BtnText = styled.Text`
     font-size: 20px;
     font-weight: bold;
-    color: ${({theme}) => theme.colors.text};
+    color: ${({theme}) => theme.colors.btnText};
 `;
 export const Description = styled.Text`
     font-size: 14px;
@@ -50,17 +49,7 @@ export const BtnContainer = styled.View`
 export const Icon = styled(Feather)`
     margin-right: 10px;
 `;
-export const CloseBtnContainer = styled(TouchableHighlight)`
-    position: absolute;
-    right: 0;
-    margin: 10px;
-`;
-export const CloseIcon = styled(FontAwesome)`
-    position: absolute;
-    right: 0;
-    margin: 10px;
-`;
-export const ButtonPlay = styled.View`
+export const ButtonPlay = styled(TouchableOpacity)`
     flex-direction: row;
     justify-content: center;
     align-items: center;

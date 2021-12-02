@@ -4,12 +4,13 @@ import {
     Container,
     BtnLogintext  
 } from './styles'
-export const LoginBtn = (): JSX.Element => {
+
+export const LoginBtn = ({...rest}): JSX.Element => {
     return (
-        <Container>
-            <BtnLogintext>
-                Entrar
-            </BtnLogintext>
-        </Container>
+            <Container {...rest}>
+                <BtnLogintext>
+                    Entrar
+                </BtnLogintext>
+            </Container>
     )
 }
