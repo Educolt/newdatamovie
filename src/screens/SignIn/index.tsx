@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 // react-hook-form
@@ -32,6 +32,9 @@ import {
 import { LoginBtn } from '../../components/LoginBtn';
 import { InputForm } from '../../components/Forms/InputForm'
 
+// app hooks
+import { useAuth } from '../../hooks/auth'
+
 // types
 interface FormData {
     username: string;
@@ -39,7 +42,6 @@ interface FormData {
 }
 
 export const SignIn = (): JSX.Element => {
-
     // state
     const [isPassVisible, setIsPassVisible] = useState(true);
     const [isAlertVisible, setIsAlertVisible] = useState(false);
@@ -57,6 +59,9 @@ export const SignIn = (): JSX.Element => {
     // toggle password visible state
     const togglePassVisible = () => {setIsPassVisible(!isPassVisible)}
 
+    // destructed app hook return
+    const { user, signIn } = useAuth();
+
     const onSubmitForm = (form: FormData) => {
 
         if((form.username === '') || (form.username === undefined)) {
@@ -68,12 +73,16 @@ export const SignIn = (): JSX.Element => {
             setAlertText('Por favor ! Digite a senha.');
             return;
         }
-        
-        const user = {
-            username: form.username,
-            password: form.password
+
+        if((user.password === form.password) && (user.username === form.username)) {
+            setIsAlertVisible(true)
+            setAlertText('Usuário Autenticado.');
+            signIn();
+        }  else {
+            setIsAlertVisible(true)
+            setAlertText('Usuário nao existe.');
+            return;
         }
-        console.log(user);   
     }
 
     return (

@@ -3,13 +3,12 @@ import { Modalize } from 'react-native-modalize';
 
 // components
 import { Card } from '../../components/Card';
-import { MovieCardModal } from '../../components/MovieCardModal'
+import { MovieCardModal } from '../../components/MovieCardModal';
+import { Header } from '../../components/Header'
 
 // styled components
 import {
-    Container, 
-    SearchInput,
-    Header,
+    Container,
     Icon,
     ListContainer,
     ListWrapper,
@@ -20,6 +19,7 @@ import {
 // rapidapi
 import { rapidApi } from '../../services/rapidApi'
 
+// types
 interface MovieProps {
     title: string,
     description: string,
@@ -92,11 +92,7 @@ export const Dashboard = (): JSX.Element => {
 
     return (
         <Container>
-            <Header>
-                <Icon name="menu" size={24} color="black" />
-                <SearchInput placeholder="Digite o nome do filme, serie, etc..." />
-                <Icon name="search" size={24} color="white" />
-            </Header>
+            <Header />
             <ListContainer>
                 <ListWrapper>
                     <Title>Filmes mais populares</Title>
@@ -113,7 +109,7 @@ export const Dashboard = (): JSX.Element => {
                 </ListWrapper>
             </ListContainer>
             <Modalize ref={modRef} adjustToContentHeight={true} snapPoint={300}>
-                <MovieCardModal movie={currClicMovie} />
+                <MovieCardModal movie={currClicMovie} isCatalogTrue={false} />
             </Modalize>
         </Container>
     )
