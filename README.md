@@ -50,7 +50,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias
   $ expo start
 
 ```
-
+Atention: Antes de rodar a applicação, criar .env file na raiz do projeto e setar os valores, de conexão com as apis em que o app vai buscar os dados em json.
 ---
 
 ### 🧔 Desenvolvedor
