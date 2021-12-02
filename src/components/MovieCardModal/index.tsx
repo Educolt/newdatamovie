@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 // alert
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { api } from '../../services/api';
 
 // styled components
 import { 
@@ -23,18 +24,18 @@ interface MovieData {
     title: string,
     description: string,
     uri: string,
-    year: string
+    year: string,
+    isCatalog: boolean
 }
 
 interface IMovieModalDataProps {
     movie: MovieData;
-    isCatalogTrue: boolean;
 }
 
-export const MovieCardModal = ({movie, isCatalogTrue}: IMovieModalDataProps): JSX.Element => {
+export const MovieCardModal = ({movie}: IMovieModalDataProps): JSX.Element => {
 
     // state
-    const [ isCatalog, setIsCatalog ] = useState(isCatalogTrue);
+    const [ isCatalogState, setIsCatalogState] = useState(movie.isCatalog);
     const [ isAlert, setIsAlert ] = useState(false);
 
     const {uri, title, description} = movie;
@@ -57,9 +58,31 @@ export const MovieCardModal = ({movie, isCatalogTrue}: IMovieModalDataProps): JS
                     <BtnText>Assistir</BtnText>
                 </ButtonPlay>
                     
-                <ButtonPlay activeOpacity={0.8} onPress={() => setIsCatalog(!isCatalog)}>
+                <ButtonPlay activeOpacity={0.8} onPress={ async () => {
+                    const response = await api.get('/movie');
+                    const catalog: MovieData[] = response.data;
+
+                    const result = catalog.find(m => m.title === title);
+
+                    setIsCatalogState(!isCatalogState);
+
+                    if(result === undefined) {
+                        try {
+                            await api.delete('/movie',{params: {title}});
+                            return
+                        } catch (error) {
+                            const data = {
+                                title,
+                                uri,
+                                description
+                            }
+                            await api.post('/movie',data);
+                            return;
+                        }
+                    }     
+                }}>
                     {
-                        isCatalog ? 
+                        isCatalogState ? 
                         <Icon name="check" size={20} color="white"/>: 
                         <Icon name="plus" size={20} color="white"/>
                     }
